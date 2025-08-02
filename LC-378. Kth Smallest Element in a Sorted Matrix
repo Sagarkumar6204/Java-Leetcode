@@ -1,0 +1,22 @@
+class Solution {
+    public int kthSmallest(int[][] matrix, int k) {
+        PriorityQueue<Integer> prioque = new PriorityQueue<>(Collections.reverseOrder());
+
+        int n = matrix.length;
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (prioque.size() < k) {
+                    prioque.add(matrix[i][j]);
+                } else { 
+                    if (matrix[i][j] < prioque.peek()) { 
+                       prioque.poll();
+                        prioque.add(matrix[i][j]);
+                    }
+                }
+            }
+        }
+
+        return prioque.peek();
+    }
+}
